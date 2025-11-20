@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="tertiary" class="toolbar-lavanda">
+    <ion-buttons slot="start"><ion-menu-button></ion-menu-button></ion-buttons>
+    <ion-title>Gastos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirAlertDetalhado()">Adicionar Gasto</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-gastos ion-padding" [fullscreen]="true">
+
+  <!-- Resumo + gráfico -->
+  <div class="grid-resumo">
+    <ion-card class="resumo-card">
+      <ion-card-content>
+        <div class="resumo-row">
+          <div>
+            <div class="titulo-pequeno">Gastos de {{ mesAtual | titlecase }}</div>
+            <div class="total-mes">R$ {{ totalMesAtual | number:'1.2-2' }}</div>
+          </div>
+          <div class="chart-wrap">
+            <canvas #donutCanvas></canvas>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Registro Rápido -->
+  <ion-card class="rapido-card">
+    <ion-card-content class="rapido-content">
+      <div class="rapido-row">
+        <ion-input placeholder="Valor do gasto (ex: 25.50)" [(ngModel)]="quickValor" inputmode="decimal"></ion-input>
+        <ion-button (click)="adicionarRapido()" color="primary">Adicionar</ion-button>
+      </div>
+      <div class="acoes-rapido" style="margin-top:8px">
+        <ion-button fill="outline" (click)="abrirAlertDetalhado()">Adicionar Gasto Detalhado</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Histórico recente -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Histórico Recente</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let g of ultimos">
+          <ion-avatar slot="start" class="avatar-cat" [style.background-color]="getCategoriaColor(g.categoria)"></ion-avatar>
+          <ion-label>
+            <h3>{{ g.descricao }}</h3>
+            <p class="muted">{{ g.categoria }} • {{ g.criadoEm | date:'dd/MM' }}</p>
+          </ion-label>
+          <ion-note slot="end" class="valor">R$ {{ g.valor | number:'1.2-2' }}</ion-note>
+          <ion-button fill="clear" slot="end" (click)="remover(g)">Remover</ion-button>
+        </ion-item>
+      </ion-list>
+
+      <div *ngIf="gastos.length === 0" class="vazio">
+        Nenhum gasto registrado. Use o botão "Adicionar" para inserir despesas.
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

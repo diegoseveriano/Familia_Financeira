@@ -1,0 +1,113 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+:root {
+  /** =============================
+   * 🎨 PALETA LAVANDA PERSONALIZADA
+   * ============================= */
+
+  /* Cor principal */
+  --ion-color-primary: #ab9cea;
+  --ion-color-primary-rgb: 171, 156, 234;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #917ce1;
+  --ion-color-primary-tint: #c5bdf3;
+
+  /* Secundária – lilás acinzentado */
+  --ion-color-secondary: #b7aef0;
+  --ion-color-secondary-rgb: 183, 174, 240;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #9e95d6;
+  --ion-color-secondary-tint: #ccc3f5;
+
+  /* Terciária – roxo suave */
+  --ion-color-tertiary: #917ce1;
+  --ion-color-tertiary-rgb: 145, 124, 225;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #7a66c9;
+  --ion-color-tertiary-tint: #a897e9;
+
+  /* Sucesso – verde pastel */
+  --ion-color-success: #9ce0b3;
+  --ion-color-success-rgb: 156, 224, 179;
+  --ion-color-success-contrast: #1a1a1a;
+  --ion-color-success-contrast-rgb: 26, 26, 26;
+  --ion-color-success-shade: #88c89d;
+  --ion-color-success-tint: #ace6bf;
+
+  /* Aviso – amarelo lavanda */
+  --ion-color-warning: #f4d06f;
+  --ion-color-warning-rgb: 244, 208, 111;
+  --ion-color-warning-contrast: #1a1a1a;
+  --ion-color-warning-contrast-rgb: 26, 26, 26;
+  --ion-color-warning-shade: #d8b85f;
+  --ion-color-warning-tint: #f6d87f;
+
+  /* Perigo – rosa suave */
+  --ion-color-danger: #e995b7;
+  --ion-color-danger-rgb: 233, 149, 183;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #cf7fa0;
+  --ion-color-danger-tint: #eea8c5;
+
+  /* Escuro – violeta profundo */
+  --ion-color-dark: #2b273f;
+  --ion-color-dark-rgb: 43, 39, 63;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #242034;
+  --ion-color-dark-tint: #403b55;
+
+  /* Médio – lilás claro */
+  --ion-color-medium: #d2c7f5;
+  --ion-color-medium-rgb: 210, 199, 245;
+  --ion-color-medium-contrast: #1a1a1a;
+  --ion-color-medium-contrast-rgb: 26, 26, 26;
+  --ion-color-medium-shade: #bcb2da;
+  --ion-color-medium-tint: #dbd1f7;
+
+  /* Claro – fundo branco lavanda */
+  --ion-color-light: #f6f5fb;
+  --ion-color-light-rgb: 246, 245, 251;
+  --ion-color-light-contrast: #1a1a1a;
+  --ion-color-light-contrast-rgb: 26, 26, 26;
+  --ion-color-light-shade: #dbdae0;
+  --ion-color-light-tint: #faf9fd;
+
+  /** Extras personalizadas para uso direto no CSS **/
+  --color-lavanda-claro: #dfd8fb;
+  --color-lavanda: #ab9cea;
+  --color-lavanda-escuro: #917ce1;
+
+/* ====== Registro padrão de cores no Ionic ====== */
+
+.ion-color-primary {
+  --ion-color-base: var(--ion-color-primary);
+  --ion-color-base-rgb: var(--ion-color-primary-rgb);
+  --ion-color-contrast: var(--ion-color-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-primary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-primary-shade);
+  --ion-color-tint: var(--ion-color-primary-tint);
+}
+
+.ion-color-secondary {
+  --ion-color-base: var(--ion-color-secondary);
+  --ion-color-base-rgb: var(--ion-color-secondary-rgb);
+  --ion-color-contrast: var(--ion-color-secondary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-secondary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-secondary-shade);
+  --ion-color-tint: var(--ion-color-secondary-tint);
+}
+
+.ion-color-tertiary {
+  --ion-color-base: var(--ion-color-tertiary);
+  --ion-color-base-rgb: var(--ion-color-tertiary-rgb);
+  --ion-color-contrast: var(--ion-color-tertiary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-tertiary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-tertiary-shade);
+  --ion-color-tint: var(--ion-color-tertiary-tint);
+}
+}

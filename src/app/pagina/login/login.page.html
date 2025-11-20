@@ -1,0 +1,293 @@
+import { Component, inject } from '@angular/core';
+import {
+  IonicModule,
+  NavController,
+  ToastController,
+  ModalController
+} from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule],
+  // CORREÇÃO: Usamos o template HTML que você enviou + estilos CSS básicos
+  template: `
+  <ion-content class="login-page" fullscreen>
+    <div class="login-wrap">
+      <div class="logo-wrap">
+        <img src="https://placehold.co/80x80/0177FF/ffffff?text=FF" alt="ícone" class="login-icon" />
+      </div>
+  
+      <h1 class="title">Família Financeira</h1>
+      <p class="subtitle">Gerencie suas finanças em família com simplicidade</p>
+  
+      <ion-card class="card-login">
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label position="stacked">Usuário</ion-label>
+            <ion-input [(ngModel)]="usuario" placeholder="Digite seu usuário" autocomplete="username"></ion-input>
+          </ion-item>
+  
+          <ion-item lines="none">
+            <ion-label position="stacked">Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="senha" placeholder="Digite sua senha" autocomplete="current-password"></ion-input>
+          </ion-item>
+  
+          <ion-button expand="block" color="primary" (click)="entrar()">Entrar</ion-button>
+  
+          <ion-button fill="clear" expand="block" (click)="abrirModalRegistro()">Criar Conta</ion-button>
+          <ion-button fill="clear" expand="block" color="medium" (click)="abrirModalRecuperacao()">Esqueci a Senha</ion-button>
+        </ion-card-content>
+      </ion-card>
+  
+      <p class="privacy small muted">Seus dados ficam seguros no Firestore.</p>
+    </div>
+  </ion-content>
+  `,
+  // Estilos necessários para centralizar o conteúdo do template
+  styles: [
+    `
+    .login-page {
+      --background: var(--ion-color-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--ion-color-tertiary-tint), var(--ion-color-light));
+    }
+    .login-wrap {
+      width: 100%;
+      max-width: 380px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    .logo-wrap {
+      padding: 20px 0;
+    }
+    .login-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--ion-color-primary);
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+      margin-bottom: 20px;
+    }
+    .card-login {
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(99, 57, 135, 0.15);
+    }
+    ion-item {
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      --min-height: 48px;
+    }
+    .privacy {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: var(--ion-color-medium);
+    }
+    `
+  ]
+})
+export class LoginPage {
+  public usuario = '';
+  public senha = '';
+
+  private auth = inject(AuthService);
+  private nav = inject(NavController);
+  private toastCtrl = inject(ToastController);
+  private modalCtrl = inject(ModalController);
+
+  async entrar() {
+    if (!this.usuario || !this.senha) {
+      this.showToast('Preencha usuário e senha');
+      return;
+    }
+    const ok = await this.auth.login(this.usuario.trim(), this.senha);
+    if (ok) {
+      this.showToast('Login efetuado');
+      this.nav.navigateRoot(['/home']);
+    } else {
+      this.showToast('Usuário ou senha inválidos, ou ocorreu um erro');
+    }
+  }
+
+  async abrirModalRegistro() {
+    const modal = await this.modalCtrl.create({
+      component: RegistroModal,
+      breakpoints: [0.5, 0.8],
+      initialBreakpoint: 0.6
+    });
+    await modal.present();
+  }
+
+  async abrirModalRecuperacao() {
+    const modal = await this.modalCtrl.create({
+      component: RecuperarModal,
+      breakpoints: [0.4],
+      initialBreakpoint: 0.4
+    });
+    await modal.present();
+  }
+
+  private async showToast(msg: string, dur = 1400) {
+    const t = await this.toastCtrl.create({ message: msg, duration: dur, position: 'bottom' });
+    await t.present();
+  }
+}
+
+// -----------------------------------------------------
+// REGISTRO MODAL (MANTIDO)
+// -----------------------------------------------------
+
+@Component({
+  selector: 'registro-modal',
+  standalone: true,
+  template: `
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-title>Criar Conta</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="fechar()">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <p class="ion-text-center">Preencha seus dados para criar uma conta.</p>
+
+    <ion-list>
+      <ion-item><ion-label position="floating">Nome Completo</ion-label><ion-input [(ngModel)]="nome"></ion-input></ion-item>
+      <ion-item><ion-label position="floating">Idade</ion-label><ion-input type="number" [(ngModel)]="idade"></ion-input></ion-item>
+      <ion-item><ion-label position="floating">E-mail</ion-label><ion-input type="email" [(ngModel)]="email"></ion-input></ion-item>
+      <ion-item><ion-label position="floating">Nascimento</ion-label><ion-input type="date" [(ngModel)]="nascimento"></ion-input></ion-item>
+      <ion-item><ion-label position="floating">Usuário (Único)</ion-label><ion-input [(ngModel)]="username"></ion-input></ion-item>
+      <ion-item><ion-label position="floating">Senha (Mín. 6 caracteres)</ion-label><ion-input type="password" [(ngModel)]="password"></ion-input></ion-item>
+    </ion-list>
+
+    <ion-button expand="block" color="success" (click)="registrar()" class="ion-margin-top">Criar Conta</ion-button>
+  </ion-content>
+  `,
+  imports: [IonicModule, CommonModule, FormsModule],
+})
+export class RegistroModal {
+  nome = '';
+  idade = 0;
+  email = '';
+  nascimento = '';
+  username = '';
+  password = '';
+
+  private auth = inject(AuthService);
+  private nav = inject(NavController);
+  private toastCtrl = inject(ToastController);
+  private modalCtrl = inject(ModalController);
+
+  async registrar() {
+    if (!this.nome || !this.username || !this.password || !this.email || !this.nascimento || !this.idade) {
+      this.showToast('Preencha todos os campos');
+      return;
+    }
+
+    // Validação básica de senha para Firebase Auth
+    if (this.password.length < 6) {
+      this.showToast('A senha deve ter no mínimo 6 caracteres');
+      return;
+    }
+
+    const ok = await this.auth.register({
+      nome: this.nome,
+      idade: this.idade,
+      email: this.email,
+      nascimento: this.nascimento,
+      username: this.username.trim(),
+      password: this.password
+    });
+
+    if (ok) {
+      this.showToast('Conta criada e login efetuado');
+      await this.modalCtrl.dismiss();
+      this.nav.navigateRoot(['/home']);
+    } else {
+      this.showToast('Falha no registro. Usuário, e-mail já existe ou credenciais inválidas.');
+    }
+  }
+
+  async fechar() {
+    await this.modalCtrl.dismiss();
+  }
+
+  private async showToast(msg: string, dur = 1400) {
+    const t = await this.toastCtrl.create({ message: msg, duration: dur, position: 'bottom' });
+    await t.present();
+  }
+}
+
+// -----------------------------------------------------
+// RECUPERAÇÃO DE SENHA MODAL (MANTIDO)
+// -----------------------------------------------------
+
+@Component({
+  selector: 'recuperar-modal',
+  standalone: true,
+  template: `
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Recuperar Senha</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="fechar()">
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <p class="ion-text-center">Informe o e-mail cadastrado para enviarmos as instruções de recuperação.</p>
+    <ion-item><ion-label position="floating">E-mail</ion-label><ion-input [(ngModel)]="email"></ion-input></ion-item>
+    <ion-button expand="block" color="tertiary" (click)="recuperar()" class="ion-margin-top">Enviar</ion-button>
+    <ion-button expand="block" fill="clear" (click)="fechar()">Cancelar</ion-button>
+  </ion-content>
+  `,
+  imports: [IonicModule, CommonModule, FormsModule],
+})
+export class RecuperarModal {
+  email = '';
+  private auth = inject(AuthService);
+  private toastCtrl = inject(ToastController);
+  private modalCtrl = inject(ModalController);
+
+  async recuperar() {
+    if (!this.email) {
+      this.showToast('Informe o e-mail');
+      return;
+    }
+    
+    await this.auth.resetPassword(this.email.trim());
+
+    this.showToast('Se o e-mail existir, enviaremos instruções.');
+    await this.modalCtrl.dismiss();
+  }
+
+  async fechar() {
+    await this.modalCtrl.dismiss();
+  }
+
+  private async showToast(msg: string, dur = 1400) {
+    const t = await this.toastCtrl.create({ message: msg, duration: dur, position: 'bottom' });
+    await t.present();
+  }
+}
