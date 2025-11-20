@@ -1,0 +1,33 @@
+<ion-app>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+  
+  <ion-menu contentId="main-content" type="overlay">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Familia Financeira</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div class="ion-padding">
+          <h2>Olá, {{ nomeUsuarioDisplay }}!</h2>
+      </div>
+
+      <ion-list id="inbox-list">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon aria-hidden="true" slot="start" [name]="p.icon"></ion-icon>
+            <ion-label>{{ p.title }}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+      
+      <div class="ion-padding-horizontal ion-padding-top" *ngIf="!(isLoggedIn$ | async)">
+          <ion-button expand="block" routerLink="/login" color="success">Fazer Login</ion-button>
+      </div>
+      <div class="ion-padding-horizontal ion-padding-top" *ngIf="(isLoggedIn$ | async)">
+          <ion-button expand="block" (click)="doLogout()" color="danger">Sair da Conta</ion-button>
+      </div>
+      
+    </ion-content>
+  </ion-menu>
+</ion-app>

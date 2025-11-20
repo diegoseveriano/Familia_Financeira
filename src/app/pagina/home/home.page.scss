@@ -1,0 +1,88 @@
+.home-content {
+  --background: var(--ion-color-light);
+  background-color: var(--ion-color-light);
+  padding: 16px;
+}
+
+/* boas vindas */
+.boas-vindas {
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--ion-color-tertiary);
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #5e35b1; /* lavanda escuro para contraste */
+  }
+}
+
+ion-card {
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(150, 100, 200, 0.15);
+  margin-bottom: 16px;
+  background: #fafafa;
+}
+
+ion-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}
+
+ion-card-subtitle {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+.muted {
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+}
+
+.grafico-container {
+  width: 100%;
+  max-width: 100%;
+  height: 220px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.grafico-empty {
+  position: absolute;
+  text-align: center;
+  color: var(--ion-color-medium);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+/* família */
+.fam-line {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.fam-name { font-weight: 600; color: var(--ion-color-dark); }
+.fam-value { color: var(--ion-color-medium); }
+
+/* progress bar */
+ion-progress-bar {
+  margin: 12px 0;
+  height: 12px;
+  border-radius: 6px;
+  --progress-background: #e1bee7;
+  --progress-bar-background: var(--ion-color-tertiary);
+}
