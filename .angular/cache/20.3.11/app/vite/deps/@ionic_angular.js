@@ -72,15 +72,9 @@ import {
   provideComponentInputBinding,
   raf,
   setIonicClasses
-} from "./chunk-574YCLWA.js";
+} from "./chunk-S4UEDDQK.js";
 import "./chunk-6U2AQA2C.js";
 import "./chunk-R4BAPKSM.js";
-import {
-  MaxValidator,
-  MinValidator,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR
-} from "./chunk-YACRYA5I.js";
 import "./chunk-43TCCNXJ.js";
 import "./chunk-RRSCGKYE.js";
 import "./chunk-VHOQ35RX.js";
@@ -93,6 +87,12 @@ import {
   Router
 } from "./chunk-GYU65KVY.js";
 import "./chunk-DJQQPREF.js";
+import {
+  MaxValidator,
+  MinValidator,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR
+} from "./chunk-YACRYA5I.js";
 import {
   CommonModule,
   Location,
@@ -155,10 +155,10 @@ import {
   ɵɵtemplate,
   ɵɵviewQuery
 } from "./chunk-P5HA2RFN.js";
-import "./chunk-UQGLAMHP.js";
 import {
   fromEvent
 } from "./chunk-576P5TAG.js";
+import "./chunk-UQGLAMHP.js";
 import {
   __decorate
 } from "./chunk-2K3BB2X3.js";

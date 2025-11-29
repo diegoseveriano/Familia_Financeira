@@ -22,9 +22,9 @@ export class AppComponent implements OnInit {
   public nomeUsuarioDisplay = 'Visitante';
   public isLoggedIn$: Observable<boolean>;
   public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
-    { title: 'Gastos', url: '/gastos', icon: 'wallet' },
-    { title: 'Opções', url: '/opcoes', icon: 'settings' },
+    { title: 'Home', url: './home', icon: 'home' },
+    { title: 'Gastos', url: './gastos', icon: 'wallet' },
+    { title: 'Opções', url: './opcoes', icon: 'settings' },
   ];
 
   constructor() {
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
 
   async doLogout() {
     await this.authService.logout();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('./login');
   }
 
 }

@@ -7,9 +7,6 @@ import {
   shouldUseCloseWatcher
 } from "./chunk-R4BAPKSM.js";
 import {
-  NgControl
-} from "./chunk-YACRYA5I.js";
-import {
   LIFECYCLE_DID_ENTER,
   LIFECYCLE_DID_LEAVE,
   LIFECYCLE_WILL_ENTER,
@@ -48,6 +45,9 @@ import {
   RouterLink,
   UrlSerializer
 } from "./chunk-GYU65KVY.js";
+import {
+  NgControl
+} from "./chunk-YACRYA5I.js";
 import {
   Location,
   LocationStrategy
@@ -4087,4 +4087,4 @@ export {
    * (C) Ionic http://ionicframework.com - MIT License
    *)
 */
-//# sourceMappingURL=chunk-574YCLWA.js.map
+//# sourceMappingURL=chunk-S4UEDDQK.js.map
